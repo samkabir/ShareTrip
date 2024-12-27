@@ -1,3 +1,4 @@
 import CartIcon from './CartIcon.svg';
+import LoadingIcon from './Loading.svg';
 
-export { CartIcon };
+export { CartIcon, LoadingIcon };

@@ -33,7 +33,7 @@ const AllProducts = () => {
         ) : error ? (
             <div>{error}</div>
         ) : (
-            <div className='grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-2'>
+            <div className='grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5  gap-2'>
                 {products?.products?.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
