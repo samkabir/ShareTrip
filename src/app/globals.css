@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Murecho";
+  src: url("../../public/fonts/Murecho/Murecho-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: thin;
+}
+
+@font-face {
+  font-family: "Murecho";
+  src: url("../../public/fonts/Murecho/Murecho-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: extralight;
+}
+
+@font-face {
+  font-family: "Murecho";
+  src: url("../../public/fonts/Murecho/Murecho-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: light;
+}
+
+@font-face {
+  font-family: "Murecho";
+  src: url("../../public/fonts/Murecho/Murecho-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Murecho";
+  src: url("../../public/fonts/Murecho/Murecho-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: medium;
+}
+
+@font-face {
+  font-family: "Murecho";
+  src: url("../../public/fonts/Murecho/Murecho-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: semibold;
+}
+
+@font-face {
+  font-family: "Murecho";
+  src: url("../../public/fonts/Murecho/Murecho-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: "Murecho";
+  src: url("../../public/fonts/Murecho/Murecho-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: extrabold;
+}
+
+@font-face {
+  font-family: "Murecho";
+  src: url("../../public/fonts/Murecho/Murecho-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: black;
+}

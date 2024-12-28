@@ -4,7 +4,7 @@ import { fetchAllProducts } from '@/api/allproducts';
 import React, { useEffect, useState } from 'react'
 import LoadingAnimation from '@/assets/Animation/LoadingAnimation.json';
 import ProductCard from '../../Cards/ProductCard/ProductCard';
-import Loading from '@/components/Utils/Loading/Loading';
+import Loading from '@/components/Utils/Components/Loading/Loading';
 
 const AllProducts = () => {
     const [products, setProducts] = useState([]);

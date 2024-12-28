@@ -7,9 +7,13 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        murecho: ['Murecho', 'sans-serif'],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        "STGrey": "#5A6573",
+        "STBlue": "#1882FF",
+        "STOrange": "#FFA03B",
       },
     },
   },
