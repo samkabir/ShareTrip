@@ -38,7 +38,7 @@ const ProductCard = ({ product }) => {
     );
     setIsFav(fav.find((favItem) => favItem.item.id === product.id) || null);
   }, [cart, fav]);
-
+console.log(fav)
   return (
     <div className="m-1 p-1 cursor-pointer rounded-lg hover:shadow-xl transition-transform duration-500 transform hover:scale-[1.02] group">
       <div className="relative flex justify-center w-full h-[200px] bg-STImageGrey group-hover:bg-black/30 rounded-lg p-2">
@@ -66,7 +66,7 @@ const ProductCard = ({ product }) => {
         )}
 
         <div
-          className="absolute top-1 right-1 hover:bg-black/50 rounded-full p-2"
+          className={`${fav.find((item)=>item?.item?.id == product?.id) ? "" : "hidden group-hover:block"}  absolute top-1 right-1 hover:bg-black/50 rounded-full p-2`}
           onClick={() => addOrRemItem(product)}
         >
           <GetIcon

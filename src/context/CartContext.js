@@ -56,7 +56,6 @@ export const CartProvider = ({ children }) => {
         discountedAmount < item?.item?.price
           ? discountedAmount
           : item.item?.price;
-      console.log(priceToUse);
       total += priceToUse * item.quantity;
     });
     setTotalPrice(total.toFixed(2));
