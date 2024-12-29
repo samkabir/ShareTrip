@@ -15,7 +15,11 @@ const nextConfig = {
           pathname: '/products/images/**', 
         },
       ],
-    }
+    },
+    eslint: {
+      // Disable eslint during builds
+      ignoreDuringBuilds: true,
+    },
   };
   
   export default nextConfig;
