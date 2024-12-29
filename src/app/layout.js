@@ -1,5 +1,4 @@
 import "./globals.css";
-import AppsProvider from "@/context/AppsProvider";
 
 
 export const metadata = {
@@ -11,9 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <AppsProvider>
           {children}
-        </AppsProvider>
       </body>
     </html>
   );
