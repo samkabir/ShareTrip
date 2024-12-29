@@ -6,7 +6,7 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -54,7 +54,14 @@ export const CartProvider = ({ children }) => {
     setTotalPrice(total.toFixed(2));
   };
 
-  // Initialize cart state from localStorage
+  const getTotalItems = () => {
+    let total = 0;
+    cart.forEach((item) => {
+      total += item.quantity;
+    });
+    setTotalItems(total);
+  };
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedCart = localStorage.getItem("cart");
@@ -70,7 +77,6 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
-  // Update localStorage when cart changes, but only if initialization is complete
   useEffect(() => {
     if (isInitialized && typeof window !== "undefined") {
       try {
@@ -83,20 +89,20 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     getTotalPrice();
+    getTotalItems();
   }, [cart]);
 
   return (
     <CartContext.Provider
       value={{
         cart,
-        open,
-        setOpen,
         totalPrice,
         setTotalPrice,
         addItem,
         removeItem,
         updateItemQuantity,
         getTotalPrice,
+        totalItems
       }}
     >
       {children}

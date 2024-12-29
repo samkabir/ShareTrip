@@ -9,6 +9,7 @@ import discountedAmount from "@/components/Utils/Functions/discountedAmount/disc
 import STButton from "@/components/Utils/Components/Buttons/STButton/STButton";
 import { useCartContext } from "@/context/CartContext";
 import { useFavourite } from "@/context/FavouriteContext";
+import ProductModal from "@/components/Modals/ProductModal/ProductModal";
 
 const ProductCard = ({ product }) => {
   const { cart, addItem, removeItem, updateItemQuantity } = useCartContext();
@@ -20,6 +21,7 @@ const ProductCard = ({ product }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isInCart, setIsInCart] = useState(null);
   const [isFav, setIsFav] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleLoad = () => {
     setIsLoading(false);
@@ -37,7 +39,6 @@ const ProductCard = ({ product }) => {
     setIsFav(fav.find((favItem) => favItem.item.id === product.id) || null);
   }, [cart, fav]);
 
-  console.log(fav);
   return (
     <div className="m-1 p-1 cursor-pointer rounded-lg hover:shadow-xl transition-transform duration-500 transform hover:scale-[1.02] group">
       <div className="relative flex justify-center w-full h-[200px] bg-STImageGrey group-hover:bg-black/30 rounded-lg p-2">
@@ -85,6 +86,8 @@ const ProductCard = ({ product }) => {
           blurDataURL="data:image/png;base64,...base64placeholder..."
           onLoad={handleLoad}
           onError={handleError}
+          loading="lazy"
+          priority={false}
           // unoptimized
         />
 
@@ -105,9 +108,10 @@ const ProductCard = ({ product }) => {
               <STButton
                 text="Quick View"
                 textStyles="text-sm text-white font-medium"
-                styles="flex justify-center p-1 border-2 rounded-lg backdrop-blur-sm hover:bg-black transition-transform duration-1000 transform"
+                styles="flex justify-center p-1 border-2 bg-STGrey opacity-30 group-hover:opacity-100 group-hover:bg-transparent rounded-lg backdrop-blur-lg hover:bg-black transition-transform duration-1000 transform"
                 iconLeft="QuickViewIcon"
                 iconLeftStyles="w-5 h-5 text-white pr-1 font-bold"
+                onClick={() => setOpen(true)}
               />
             </div>
           </div>
@@ -128,6 +132,7 @@ const ProductCard = ({ product }) => {
                 styles="flex justify-center p-1 border-2 rounded-lg backdrop-blur-sm hover:bg-black transition-transform duration-1000 transform"
                 iconLeft="QuickViewIcon"
                 iconLeftStyles="w-5 h-5 text-white pr-1 font-bold"
+                onClick={() => setOpen(true)}
               />
             </div>
           </div>
@@ -157,6 +162,14 @@ const ProductCard = ({ product }) => {
           )}
         </div>
       </div>
+
+      <ProductModal
+        modalOpen={open}
+        handleClose={() => setOpen(false)}
+        product={product}
+        productImage={productImage}
+        isInCart={isInCart}
+      />
     </div>
   );
 };

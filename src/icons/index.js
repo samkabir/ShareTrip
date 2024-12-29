@@ -9,5 +9,7 @@ import TrashIcon from './TrashIcon.svg';
 import PlusIcon from './PlusIcon.svg';
 import HeartIcon from './HeartIcon.svg';
 import HeartFilledIcon from './HeartFilledIcon.svg';
+import CrossIcon from './CrossIcon.svg';
+import StarIcon from './StarIcon.svg';
 
-export { CartIcon, LoadingIcon, TakaIcon, ProductTailIcon, ProductConnectorIcon, AddToCartIcon, QuickViewIcon, TrashIcon, PlusIcon, HeartIcon, HeartFilledIcon };
+export { CartIcon, LoadingIcon, TakaIcon, ProductTailIcon, ProductConnectorIcon, AddToCartIcon, QuickViewIcon, TrashIcon, PlusIcon, HeartIcon, HeartFilledIcon, CrossIcon, StarIcon };
