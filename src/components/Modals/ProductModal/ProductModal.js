@@ -14,8 +14,7 @@ const ProductModal = ({
   productImage,
   isInCart,
 }) => {
-  
-    const { cart, addItem, removeItem, updateItemQuantity } = useCartContext();
+  const { cart, addItem, removeItem, updateItemQuantity } = useCartContext();
   return (
     <div>
       <Modal
@@ -29,11 +28,11 @@ const ProductModal = ({
             <div className="text-xl font-semibold text-black font-murecho">
               {product?.title}
             </div>
-            <div
-              className="cursor-pointer "
-              onClick={handleClose}
-            >
-              <GetIcon name="CrossIcon" className="w-7 h-7 text-black hover:text-red-500" />
+            <div className="cursor-pointer " onClick={handleClose}>
+              <GetIcon
+                name="CrossIcon"
+                className="w-7 h-7 text-black hover:text-red-500"
+              />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3 mt-2 h-[80%]">
@@ -134,36 +133,36 @@ const ProductModal = ({
                 </div>
               </div>
               <div className="mt-10">
-              {isInCart ? (
-                <div className="select-none">
-                  <div className="flex flex-col font-murecho transition-transform duration-1000 transform gap-1">
-                    <STButton
-                      text={`${isInCart?.quantity} Added in Cart`}
-                      textStyles="text-xl text-white font-medium"
-                      styles="flex p-1 border-2 rounded-lg flex justify-between bg-STGreen transition-transform duration-1000 transform"
-                      iconLeft="TrashIcon"
-                      iconLeftStyles="w-7 h-7 cursor-pointer text-white mr-1 p-[1px] font-bold hover:bg-black hover:text-white rounded-xl flex justify-center items-center"
-                      iconRight="PlusIcon"
-                      iconRightStyles="w-7 h-7 cursor-pointer text-white ml-1 font-bold hover:bg-black hover:text-white rounded-xl flex justify-center items-center"
-                      onClickIconRight={() => updateItemQuantity(product?.id)}
-                      onClickIconLeft={() => removeItem(product?.id)}
-                    />
+                {isInCart ? (
+                  <div className="select-none">
+                    <div className="flex flex-col font-murecho transition-transform duration-1000 transform gap-1">
+                      <STButton
+                        text={`${isInCart?.quantity} Added in Cart`}
+                        textStyles="text-xl text-white font-medium"
+                        styles="flex p-1 border-2 rounded-lg flex justify-between bg-STGreen transition-transform duration-1000 transform"
+                        iconLeft="TrashIcon"
+                        iconLeftStyles="w-7 h-7 cursor-pointer text-white mr-1 p-[1px] font-bold hover:bg-black hover:text-white rounded-xl flex justify-center items-center"
+                        iconRight="PlusIcon"
+                        iconRightStyles="w-7 h-7 cursor-pointer text-white ml-1 font-bold hover:bg-black hover:text-white rounded-xl flex justify-center items-center"
+                        onClickIconRight={() => updateItemQuantity(product?.id)}
+                        onClickIconLeft={() => removeItem(product?.id)}
+                      />
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <div className="select-none">
-                  <div className="w-full font-murecho transition-transform duration-1000 transform gap-1">
-                    <STButton
-                      text="Add To Cart"
-                      textStyles="text-xl text-white font-medium"
-                      styles="flex p-1 border-2 rounded-lg cursor-pointer flex justify-center backdrop-blur-sm hover:bg-black bg-STGrey opacity-50 transition-transform duration-1000 transform"
-                      iconLeft="AddToCartIcon"
-                      iconLeftStyles="w-7 h-7 text-white pr-1 font-bold"
-                      onClick={() => addItem(product, 1)}
-                    />
+                ) : (
+                  <div className="select-none">
+                    <div className="w-full font-murecho transition-transform duration-1000 transform gap-1">
+                      <STButton
+                        text="Add To Cart"
+                        textStyles="text-xl text-white font-medium"
+                        styles="flex p-1 border-2 rounded-lg cursor-pointer flex justify-center backdrop-blur-sm hover:bg-black bg-STGrey opacity-50 transition-transform duration-1000 transform"
+                        iconLeft="AddToCartIcon"
+                        iconLeftStyles="w-7 h-7 text-white pr-1 font-bold"
+                        onClick={() => addItem(product, 1)}
+                      />
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
               </div>
             </div>
           </div>

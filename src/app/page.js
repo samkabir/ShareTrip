@@ -1,5 +1,7 @@
+"use client";
+
 import Navbar from "@/components/Navbar/Navbar";
-import AllProducts from "@/components/Pages/AllProductsPage/AllProducts";
+import AllProducts from "@/components/WebPages/AllProductsPage/AllProducts";
 
 export default function Home() {
   return (

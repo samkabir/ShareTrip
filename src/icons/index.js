@@ -1,3 +1,5 @@
+"use client";
+
 import CartIcon from './CartIcon.svg';
 import LoadingIcon from './Loading.svg';
 import TakaIcon from './TakaIcon.svg';

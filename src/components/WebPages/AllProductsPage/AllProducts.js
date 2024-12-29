@@ -1,6 +1,6 @@
 'use client';
 
-import { fetchAllProducts } from '@/api/allproducts';
+import { fetchAllProducts } from '@/allApi/allproducts';
 import React, { useEffect, useState } from 'react'
 import LoadingAnimation from '@/assets/Animation/LoadingAnimation.json';
 import ProductCard from '../../Cards/ProductCard/ProductCard';
@@ -21,7 +21,9 @@ const AllProducts = () => {
         setLoading(false);
     };
     useEffect(() => {
-        getAllProducts();
+        if (typeof window !== "undefined"){
+            getAllProducts();
+        }
     }, []);
     
   return (

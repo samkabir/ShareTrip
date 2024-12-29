@@ -95,8 +95,10 @@ export const CartProvider = ({ children }) => {
   }, [cart, isInitialized]);
 
   useEffect(() => {
-    getTotalPrice();
-    getTotalItems();
+    if (typeof window !== "undefined") {
+      getTotalPrice();
+      getTotalItems();
+    }
   }, [cart]);
 
   return (
