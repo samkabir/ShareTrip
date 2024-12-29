@@ -1,3 +1,5 @@
+"use client";
+
 import React, { Suspense } from "react";
 import { CartProvider } from "./CartContext";
 import { FavouriteProvider } from "./FavouriteContext";
