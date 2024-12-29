@@ -31,14 +31,16 @@ const ProductCard = ({ product }) => {
   };
 
   useEffect(() => {
-    setIsInCart(cart.find((cartItem) => cartItem.item.id === product.id) || null);
+    setIsInCart(
+      cart.find((cartItem) => cartItem.item.id === product.id) || null
+    );
     setIsFav(fav.find((favItem) => favItem.item.id === product.id) || null);
   }, [cart, fav]);
 
   console.log(fav);
   return (
     <div className="m-1 p-1 cursor-pointer rounded-lg hover:shadow-xl transition-transform duration-500 transform hover:scale-[1.02] group">
-      <div className="relative flex w-full h-[200px] bg-STImageGrey group-hover:bg-black/30 rounded-lg p-2">
+      <div className="relative flex justify-center w-full h-[200px] bg-STImageGrey group-hover:bg-black/30 rounded-lg p-2">
         {isLoading && (
           <div className="absolute top-1/3">
             <GetIcon name="LoadingIcon" className="w-10 h-10" />
@@ -62,44 +64,14 @@ const ProductCard = ({ product }) => {
           </>
         )}
 
-        <div className="absolute top-1/4 right-1/4 transform translate-x-1/4 -translate-y-1/4 hover:bg-black/50 rounded-full p-1" onClick={()=>addOrRemItem(product)}>
-          <GetIcon name={isFav ? "HeartFilledIcon" : "HeartIcon"} className="w-6 h-6 text-white" />
-        </div>
-
-        <div className="absolute top-[120px] left-2/4 transform -translate-x-2/4 -translate-y-1/12 ">
-          <div className="hidden group-hover:flex items-center font-murecho transition-transform duration-1000 transform mb-1">
-            {isInCart ? (
-              <STButton
-                text={`${isInCart?.quantity} Added in Cart`}
-                textStyles="text-sm text-white font-medium"
-                styles="flex py-1 px-2 border-2 rounded-lg bg-STGreen transition-transform duration-1000 transform"
-                iconLeft="TrashIcon"
-                iconLeftStyles="w-5 h-5 text-white pr-1 font-bold hover:bg-black hover:text-white rounded-xl flex justify-center items-center"
-                iconRight="PlusIcon"
-                iconRightStyles="w-5 h-5 text-white pr-1 font-bold hover:bg-black hover:text-white rounded-xl flex justify-center items-center"
-                onClickIconRight={() => updateItemQuantity(product?.id)}
-                onClickIconLeft={() => removeItem(product?.id)}
-              />
-            ) : (
-              <STButton
-                text="Add To Cart"
-                textStyles="text-sm text-white font-medium"
-                styles="flex py-1 px-2 border-2 rounded-lg backdrop-blur-sm hover:bg-black transition-transform duration-1000 transform"
-                iconLeft="AddToCartIcon"
-                iconLeftStyles="w-5 h-5 text-white pr-1 font-bold"
-                onClick={() => addItem(product, 1)}
-              />
-            )}
-          </div>
-          <div className="hidden group-hover:flex items-center font-murecho transition-transform duration-1000 transform mb-1">
-            <STButton
-              text="Quick View"
-              textStyles="text-sm text-white font-medium"
-              styles="flex py-1 px-2 border-2 rounded-lg backdrop-blur-sm hover:bg-black transition-transform duration-1000 transform"
-              iconLeft="QuickViewIcon"
-              iconLeftStyles="w-5 h-5 text-white pr-1 font-bold"
-            />
-          </div>
+        <div
+          className="absolute top-1 right-1 hover:bg-black/50 rounded-full p-2"
+          onClick={() => addOrRemItem(product)}
+        >
+          <GetIcon
+            name={isFav ? "HeartFilledIcon" : "HeartIcon"}
+            className="w-6 h-6 text-white"
+          />
         </div>
 
         <Image
@@ -115,7 +87,53 @@ const ProductCard = ({ product }) => {
           onError={handleError}
           // unoptimized
         />
+
+        {isInCart ? (
+          <div className="absolute bottom-0 transform -translate-y-2 select-none">
+            <div className="flex flex-col font-murecho transition-transform duration-1000 transform gap-1">
+              <STButton
+                text={`${isInCart?.quantity} Added in Cart`}
+                textStyles="text-sm text-white font-medium"
+                styles="flex p-1 border-2 rounded-lg bg-STGreen transition-transform duration-1000 transform"
+                iconLeft="TrashIcon"
+                iconLeftStyles="w-5 h-5 text-white mr-1 p-[1px] font-bold hover:bg-black hover:text-white rounded-xl flex justify-center items-center"
+                iconRight="PlusIcon"
+                iconRightStyles="w-5 h-5 text-white ml-1 font-bold hover:bg-black hover:text-white rounded-xl flex justify-center items-center"
+                onClickIconRight={() => updateItemQuantity(product?.id)}
+                onClickIconLeft={() => removeItem(product?.id)}
+              />
+              <STButton
+                text="Quick View"
+                textStyles="text-sm text-white font-medium"
+                styles="flex justify-center p-1 border-2 rounded-lg backdrop-blur-sm hover:bg-black transition-transform duration-1000 transform"
+                iconLeft="QuickViewIcon"
+                iconLeftStyles="w-5 h-5 text-white pr-1 font-bold"
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="absolute bottom-0 transform -translate-y-2 select-none">
+            <div className="hidden group-hover:flex flex-col justify-center items-center font-murecho transition-transform duration-1000 transform gap-1">
+              <STButton
+                text="Add To Cart"
+                textStyles="text-sm text-white font-medium"
+                styles="flex p-1 border-2 rounded-lg backdrop-blur-sm hover:bg-black transition-transform duration-1000 transform"
+                iconLeft="AddToCartIcon"
+                iconLeftStyles="w-5 h-5 text-white pr-1 font-bold"
+                onClick={() => addItem(product, 1)}
+              />
+              <STButton
+                text="Quick View"
+                textStyles="text-sm text-white font-medium"
+                styles="flex justify-center p-1 border-2 rounded-lg backdrop-blur-sm hover:bg-black transition-transform duration-1000 transform"
+                iconLeft="QuickViewIcon"
+                iconLeftStyles="w-5 h-5 text-white pr-1 font-bold"
+              />
+            </div>
+          </div>
+        )}
       </div>
+
       <div className="p-1">
         <div className="text-sm font-normal text-STGrey font-murecho">
           ShareTrip
