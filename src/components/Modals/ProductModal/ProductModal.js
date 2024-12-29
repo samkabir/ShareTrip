@@ -30,10 +30,10 @@ const ProductModal = ({
               {product?.title}
             </div>
             <div
-              className="cursor-pointer hover:text-red-500"
+              className="cursor-pointer "
               onClick={handleClose}
             >
-              X
+              <GetIcon name="CrossIcon" className="w-7 h-7 text-black hover:text-red-500" />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3 mt-2 h-[80%]">

@@ -1,5 +1,6 @@
 "use client";
 
+import discountedPrice from "@/components/Utils/Functions/discountedPrice/discountedPrice";
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 const CartContext = createContext();
@@ -22,7 +23,7 @@ export const CartProvider = ({ children }) => {
         updatedCart = [...prevCart];
         updatedCart[existingItemIndex].quantity = count;
       } else {
-        updatedCart = [...prevCart, { item, quantity: count}];
+        updatedCart = [...prevCart, { item, quantity: count }];
       }
 
       return updatedCart;
@@ -37,7 +38,9 @@ export const CartProvider = ({ children }) => {
   const updateItemQuantity = (itemId) => {
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
-        cartItem.item.id === itemId ? { ...cartItem, quantity:cartItem.quantity+1 } : cartItem
+        cartItem.item.id === itemId
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
       )
     );
   };
@@ -45,10 +48,15 @@ export const CartProvider = ({ children }) => {
   const getTotalPrice = () => {
     let total = 0;
     cart.forEach((item) => {
+      const discountedAmount = discountedPrice(
+        item?.item?.price,
+        item?.item?.discountPercentage
+      );
       const priceToUse =
-        item?.item?.discounted_price < item?.item?.price
-          ? item.item?.discounted_price
+        discountedAmount < item?.item?.price
+          ? discountedAmount
           : item.item?.price;
+      console.log(priceToUse);
       total += priceToUse * item.quantity;
     });
     setTotalPrice(total.toFixed(2));
@@ -101,8 +109,7 @@ export const CartProvider = ({ children }) => {
         addItem,
         removeItem,
         updateItemQuantity,
-        getTotalPrice,
-        totalItems
+        totalItems,
       }}
     >
       {children}
@@ -110,5 +117,4 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-
-export const useCartContext = () => useContext(CartContext)
+export const useCartContext = () => useContext(CartContext);
