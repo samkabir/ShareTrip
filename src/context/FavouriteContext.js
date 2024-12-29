@@ -6,7 +6,6 @@ const FavContext = createContext();
 
 export const FavouriteProvider = ({ children }) => {
   const [fav, setFav] = useState([]);
-  const [isInitialized, setIsInitialized] = useState(false);
 
   const addOrRemItem = (item) => {
     setFav((prevFav) => {
@@ -25,31 +24,6 @@ export const FavouriteProvider = ({ children }) => {
       return updatedFav;
     });
   };
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const savedFav = localStorage.getItem("favs");
-      if (savedFav) {
-        try {
-          setFav(JSON.parse(savedFav));
-        } catch (error) {
-          console.error("Failed to parse favs from localStorage:", error);
-          setFav([]);
-        }
-      }
-      setIsInitialized(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isInitialized && typeof window !== "undefined") {
-      try {
-        localStorage.setItem("favs", JSON.stringify(fav));
-      } catch (error) {
-        console.error("Failed to save favourite to localStorage:", error);
-      }
-    }
-  }, [fav, isInitialized]);
 
   return (
     <FavContext.Provider

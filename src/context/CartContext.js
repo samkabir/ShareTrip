@@ -9,7 +9,6 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [isInitialized, setIsInitialized] = useState(false);
 
   const addItem = (item, count) => {
     setCart((prevCart) => {
@@ -68,31 +67,6 @@ export const CartProvider = ({ children }) => {
     });
     setTotalItems(total);
   };
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const savedCart = localStorage.getItem("cart");
-      if (savedCart) {
-        try {
-          setCart(JSON.parse(savedCart));
-        } catch (error) {
-          console.error("Failed to parse cart from localStorage:", error);
-          setCart([]);
-        }
-      }
-      setIsInitialized(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isInitialized && typeof window !== "undefined") {
-      try {
-        localStorage.setItem("cart", JSON.stringify(cart));
-      } catch (error) {
-        console.error("Failed to save cart to localStorage:", error);
-      }
-    }
-  }, [cart, isInitialized]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
