@@ -30,7 +30,7 @@ const AllProducts = () => {
     <div className='customGridRange my-5'>
         {loading ? (
             <div className='flex justify-center items-center mt-20'>
-                <Loading animationData={LoadingAnimation} loop={true} autoplay={true} style={{ width: 300, height: 300 }} />
+                <Loading animationData={LoadingAnimation} style="w-[300px] h-[300px]" />
             </div>
         ) : error ? (
             <div className='flex justify-center'>{error}</div>
