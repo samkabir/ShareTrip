@@ -1,3 +1,5 @@
+'use client';
+
 import GetIcon from '@/utils/GetIcon/GetIcon'
 
 const STButton = ({text="", styles, onClick, iconRight, iconRightStyles="w-5 h-5", iconLeft, iconLeftStyles="w-5 h-5", textStyles, onClickIconRight, onClickIconLeft}) => {
