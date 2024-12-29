@@ -1,10 +1,9 @@
 'use client';
 
 import { fetchAllProducts } from '@/allApi/allproducts';
-import React, { useEffect, useState } from 'react'
-import LoadingAnimation from '@/assets/Animation/LoadingAnimation.json';
+import React, { useEffect, useState } from 'react';
 import ProductCard from '../../Cards/ProductCard/ProductCard';
-import Loading from '@/components/Utils/Components/Loading/Loading';
+import GetIcon from '@/utils/GetIcon/GetIcon';
 
 const AllProducts = () => {
     const [products, setProducts] = useState([]);
@@ -30,7 +29,7 @@ const AllProducts = () => {
     <div className='customGridRange my-5'>
         {loading ? (
             <div className='flex justify-center items-center mt-20'>
-                <Loading animationData={LoadingAnimation} style="w-[300px] h-[300px]" />
+                <GetIcon name="LoadingIcon" className="w-16 h-16 text-STBlue" />
             </div>
         ) : error ? (
             <div className='flex justify-center'>{error}</div>
