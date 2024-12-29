@@ -4,7 +4,7 @@ import { fetchAllProducts } from '@/api/allproducts';
 import React, { useEffect, useState } from 'react'
 import LoadingAnimation from '@/assets/Animation/LoadingAnimation.json';
 import ProductCard from '../../Cards/ProductCard/ProductCard';
-import Loading from '@/components/Utils/Loading/Loading';
+import Loading from '@/components/Utils/Components/Loading/Loading';
 
 const AllProducts = () => {
     const [products, setProducts] = useState([]);
@@ -31,9 +31,9 @@ const AllProducts = () => {
                 <Loading animationData={LoadingAnimation} loop={true} autoplay={true} style={{ width: 300, height: 300 }} />
             </div>
         ) : error ? (
-            <div>{error}</div>
+            <div className='flex justify-center'>{error}</div>
         ) : (
-            <div className='grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-2'>
+            <div className='grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5  gap-2'>
                 {products?.products?.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
