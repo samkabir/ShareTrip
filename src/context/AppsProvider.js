@@ -7,9 +7,11 @@ import { FavouriteProvider } from "./FavouriteContext";
 const AppsProvider = ({ children }) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <CartProvider>
-        <FavouriteProvider>{children}</FavouriteProvider>
-      </CartProvider>
+      {/* <CartProvider> */}
+        {/* <FavouriteProvider> */}
+          {children}
+          {/* </FavouriteProvider> */}
+      {/* </CartProvider> */}
     </Suspense>
   );
 };
