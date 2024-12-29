@@ -38,7 +38,6 @@ const ProductCard = ({ product }) => {
     );
     setIsFav(fav.find((favItem) => favItem.item.id === product.id) || null);
   }, [cart, fav]);
-console.log(fav)
   return (
     <div className="m-1 p-1 cursor-pointer rounded-lg hover:shadow-xl transition-transform duration-500 transform hover:scale-[1.02] group">
       <div className="relative flex justify-center w-full h-[200px] bg-STImageGrey group-hover:bg-black/30 rounded-lg p-2">
