@@ -1,6 +1,5 @@
 "use client";
 
-import { useCartContext } from "@/context/CartContext";
 import GetIcon from "@/utils/GetIcon/GetIcon";
 
 const Navbar = () => {
