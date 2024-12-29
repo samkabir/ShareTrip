@@ -1,3 +1,4 @@
+import AppsProvider from "@/context/AppsProvider";
 import "./globals.css";
 
 
@@ -10,7 +11,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+      <AppsProvider>
           {children}
+      </AppsProvider>
       </body>
     </html>
   );
