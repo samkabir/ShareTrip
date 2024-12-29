@@ -14,6 +14,8 @@ export default {
         "STGrey": "#5A6573",
         "STBlue": "#1882FF",
         "STOrange": "#FFA03B",
+        "STImageGrey": "#ebe6e6",
+        "STGreen": "#03A629",
       },
     },
   },

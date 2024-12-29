@@ -2,16 +2,24 @@
 
 import Image from "next/image";
 import DefaultProductImage from "@/assets/Images/DefaultProductImage.webp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GetIcon from "@/utils/GetIcon/GetIcon";
 import discountedPrice from "@/components/Utils/Functions/discountedPrice/discountedPrice";
 import discountedAmount from "@/components/Utils/Functions/discountedAmount/discountedAmount";
+import STButton from "@/components/Utils/Components/Buttons/STButton/STButton";
+import { useCartContext } from "@/context/CartContext";
+import { useFavourite } from "@/context/FavouriteContext";
 
 const ProductCard = ({ product }) => {
+  const { cart, addItem, removeItem, updateItemQuantity } = useCartContext();
+  const { fav, addOrRemItem } = useFavourite();
+
   const [productImage, setProductImage] = useState(
     product?.images?.length > 0 ? product?.images[0] : DefaultProductImage
   );
   const [isLoading, setIsLoading] = useState(true);
+  const [isInCart, setIsInCart] = useState(null);
+  const [isFav, setIsFav] = useState(false);
 
   const handleLoad = () => {
     setIsLoading(false);
@@ -21,9 +29,16 @@ const ProductCard = ({ product }) => {
     setIsLoading(false);
     setProductImage(DefaultProductImage);
   };
+
+  useEffect(() => {
+    setIsInCart(cart.find((cartItem) => cartItem.item.id === product.id) || null);
+    setIsFav(fav.find((favItem) => favItem.item.id === product.id) || null);
+  }, [cart, fav]);
+
+  console.log(fav);
   return (
-    <div className="m-1 p-1 cursor-pointer rounded-lg hover:shadow-xl transition-transform duration-500 transform hover:scale-[1.02]">
-      <div className="relative flex w-full h-[200px] bg-[#ebe6e6] rounded-lg p-2">
+    <div className="m-1 p-1 cursor-pointer rounded-lg hover:shadow-xl transition-transform duration-500 transform hover:scale-[1.02] group">
+      <div className="relative flex w-full h-[200px] bg-STImageGrey group-hover:bg-black/30 rounded-lg p-2">
         {isLoading && (
           <div className="absolute top-1/3">
             <GetIcon name="LoadingIcon" className="w-10 h-10" />
@@ -32,17 +47,60 @@ const ProductCard = ({ product }) => {
         {product?.discountPercentage > 0 && (
           <>
             <div className="absolute flex top-4 -left-[4px]">
-              <div className="flex items-center bg-STOrange text-xs font-normal text-white font-murecho p-[2px] rounded-tl-md">
+              <div className="flex items-center bg-STOrange text-xs font-normal text-white font-murecho p-[2px] rounded-tl-md pl-2">
                 - <GetIcon name="TakaIcon" className="w-5 h-5" />
                 {discountedAmount(product?.price, product?.discountPercentage)}
               </div>
-              <GetIcon name="ProductTailIcon" className="w-full h-full" />
+              <GetIcon
+                name="ProductTailIcon"
+                className="w-full h-full -ml-[1px]"
+              />
             </div>
             <div className="absolute top-10 -left-[4px]">
               <GetIcon name="ProductConnectorIcon" className="w-16 h-16" />
             </div>
           </>
         )}
+
+        <div className="absolute top-1/4 right-1/4 transform translate-x-1/4 -translate-y-1/4 hover:bg-black/50 rounded-full p-1" onClick={()=>addOrRemItem(product)}>
+          <GetIcon name={isFav ? "HeartFilledIcon" : "HeartIcon"} className="w-6 h-6 text-white" />
+        </div>
+
+        <div className="absolute top-[120px] left-2/4 transform -translate-x-2/4 -translate-y-1/12 ">
+          <div className="hidden group-hover:flex items-center font-murecho transition-transform duration-1000 transform mb-1">
+            {isInCart ? (
+              <STButton
+                text={`${isInCart?.quantity} Added in Cart`}
+                textStyles="text-sm text-white font-medium"
+                styles="flex py-1 px-2 border-2 rounded-lg bg-STGreen transition-transform duration-1000 transform"
+                iconLeft="TrashIcon"
+                iconLeftStyles="w-5 h-5 text-white pr-1 font-bold hover:bg-black hover:text-white rounded-xl flex justify-center items-center"
+                iconRight="PlusIcon"
+                iconRightStyles="w-5 h-5 text-white pr-1 font-bold hover:bg-black hover:text-white rounded-xl flex justify-center items-center"
+                onClickIconRight={() => updateItemQuantity(product?.id)}
+                onClickIconLeft={() => removeItem(product?.id)}
+              />
+            ) : (
+              <STButton
+                text="Add To Cart"
+                textStyles="text-sm text-white font-medium"
+                styles="flex py-1 px-2 border-2 rounded-lg backdrop-blur-sm hover:bg-black transition-transform duration-1000 transform"
+                iconLeft="AddToCartIcon"
+                iconLeftStyles="w-5 h-5 text-white pr-1 font-bold"
+                onClick={() => addItem(product, 1)}
+              />
+            )}
+          </div>
+          <div className="hidden group-hover:flex items-center font-murecho transition-transform duration-1000 transform mb-1">
+            <STButton
+              text="Quick View"
+              textStyles="text-sm text-white font-medium"
+              styles="flex py-1 px-2 border-2 rounded-lg backdrop-blur-sm hover:bg-black transition-transform duration-1000 transform"
+              iconLeft="QuickViewIcon"
+              iconLeftStyles="w-5 h-5 text-white pr-1 font-bold"
+            />
+          </div>
+        </div>
 
         <Image
           src={productImage}
