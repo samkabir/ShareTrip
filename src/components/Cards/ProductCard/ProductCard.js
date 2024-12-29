@@ -33,10 +33,13 @@ const ProductCard = ({ product }) => {
   };
 
   useEffect(() => {
-    setIsInCart(
-      cart.find((cartItem) => cartItem.item.id === product.id) || null
-    );
-    setIsFav(fav.find((favItem) => favItem.item.id === product.id) || null);
+    if (typeof window !== "undefined"){
+      setIsInCart(
+        cart.find((cartItem) => cartItem.item.id === product.id) || null
+      );
+      setIsFav(fav.find((favItem) => favItem.item.id === product.id) || null);
+    }
+   
   }, [cart, fav]);
   return (
     <div className="m-1 p-1 cursor-pointer rounded-lg hover:shadow-xl transition-transform duration-500 transform hover:scale-[1.02] group">

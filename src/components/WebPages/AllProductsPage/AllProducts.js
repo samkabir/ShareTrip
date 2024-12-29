@@ -21,7 +21,9 @@ const AllProducts = () => {
         setLoading(false);
     };
     useEffect(() => {
-        getAllProducts();
+        if (typeof window !== "undefined"){
+            getAllProducts();
+        }
     }, []);
     
   return (
